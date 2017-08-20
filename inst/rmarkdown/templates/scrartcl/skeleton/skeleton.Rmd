@@ -1,0 +1,43 @@
+---
+title: "scrartcl"
+subtitle: "KOMA-script articles with komadown"
+author:
+  - name: "Johan Larsson"
+date: "`r Sys.Date()`"
+automark: yes
+colorlinks: yes
+fontpack-libertine: yes
+classoption:
+  - DIV=calc
+  - headsepline=true
+header:
+  - pos: ro
+    first: "Text on first page."
+    next: "Text on subsequent pages."
+caption:
+  - labelfont=bf
+  - labelsep=period
+  - font=small
+setkomafont:
+  - element: descriptionlabel
+    commands: \normalfont\scshape\bfseries
+KOMAoptions:
+  - headings=standardclasses
+  - DIV=last
+output: komadown::scrartcl
+---
+
+```{r, include = FALSE}
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  dev = "pdf",
+  dev.args = list(pointsize = 8),
+  crop = FALSE
+)
+
+options(digits = 3)
+```
+
+# Introduction
