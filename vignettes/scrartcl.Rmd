@@ -34,6 +34,10 @@ vignette: >
 ```{r, include = FALSE}
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 
+# Fix subfigs for rmarkdown
+if (identical(knitr:::pandoc_to(), 'latex'))
+  knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
+
 knitr::opts_chunk$set(
   echo = FALSE,
   fig.width = 2.3,
@@ -244,8 +248,8 @@ for a description of the various prefixes.
 
 # Font packages
 
-**komadown** includes a few font packs that consist of font combinations 
-(serif, sans-serif, and monospace). All are based on the
+**komadown** includes a few font packs of selected combinations of
+serif, sans-serif, and monospace fonts. All are based on the
 tremendous \LaTeX\ package [newtx](https://www.ctan.org/pkg/newtx) from Michael
 Sharpe. They are accessed with the metadata option `fontpack-x`, `x` being one
 of the options in Table \@ref(tab:fontpack).
@@ -254,15 +258,10 @@ Table: (\#tab:fontpack) Customized fontpackages
 
 Font pack            Serif              Sans-serif     Monospace
 ---------------      --------           ------------   ----------
+times (default)      Times New Roman    Helvetica      newtxtt
 charter              XCharter (Charter) Cabin          Inconsolata
 erewhon              Erewhon (utopia)   Cabin          Inconsolata
 libertine            Libertine          Biolinum       Inconsolata
-times[^1]            Times New Roman    Helvetica      newtxtt
-
-
-[^1]: There is currently an issue using **authblk** (which **komadown**
-uses to set up title blocks) together with **newtxtext** that causes
-superscripts for the author footnotes to be malformed.
 
 Hence, to use the erewhon font pack, you would need to set the following.
 ```yaml
@@ -292,8 +291,11 @@ take on this.
 
 # Bibliography style
 
-The default bibliography style is the vancouver [@patrias_2007] style. It
-can be replaced with any `.csl` style using the usual **pandoc** interface.
+The default bibliography style is the *Vancouver Style* [@patrias_2007], which
+has been authored by Michael Berkowitz and been included in the package
+(licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+It can be replaced with any `.csl` style using the usual **pandoc** interface or
+any configuration via ``biblatex`` or ``natbib`.
 
 # Author blocks
 

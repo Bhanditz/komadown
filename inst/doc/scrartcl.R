@@ -1,6 +1,10 @@
 ## ---- include = FALSE----------------------------------------------------
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 
+# Fix subfigs for rmarkdown
+if (identical(knitr:::pandoc_to(), 'latex'))
+  knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
+
 knitr::opts_chunk$set(
   echo = FALSE,
   fig.width = 2.3,

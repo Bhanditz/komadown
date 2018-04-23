@@ -7,7 +7,8 @@
 #' block of the R Markdown file.
 #'
 #' @inheritParams bookdown::pdf_document2
-#' @param \dots Arguments to
+#' @param ... Arguments passed down to [bookdown::pdf_document2()]
+#' @param csl bibliography style in the `.csl` format
 #'
 #' @return R Markdown output format to pass to [rmarkdown::render()].
 #' @examples
@@ -19,13 +20,14 @@
 #' @export
 scrartcl <- function(...,
                      number_sections = TRUE,
-                     md_extensions = c("-autolink_bare_uris")){
+                     md_extensions = c("-autolink_bare_uris"),
+                     csl = find_resource("scrartcl", "vancouver-brackets.csl")){
   pdf_document_format(
     ...,
     number_sections = number_sections,
     md_extensions = md_extensions,
     format = "scrartcl",
-    template = "template.tex",
-    csl = "vancouver-brackets.csl"
+    template = "scrartcl.tex",
+    csl = csl
   )
 }
